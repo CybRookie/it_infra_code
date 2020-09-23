@@ -4,8 +4,15 @@
     name: nginx
     state: latest
     update_cache: yes
-- name: Change Nginx's default page
-  copy:
-    src: index.html
-    dest: /var/www/html/
 
+#Lab 2 task
+#- name: Change Nginx's default page
+#  copy:
+#    src: index.html
+#    dest: /var/www/html/
+
+- name: Change Nginx's default configuration
+  copy:
+    src: default
+    dest: /etc/nginx/sites-available/default
+  notify: Restart Nginx
