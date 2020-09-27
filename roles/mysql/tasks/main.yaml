@@ -1,0 +1,31 @@
+---
+- name: Install MySQL
+  apt: 
+    name: mysql-server
+    state: latest
+    update_cache: yes
+
+- name: Override MySQL configuration
+  copy:
+    src: override.cnf
+    dest: /etc/mysql/mysql.conf.d/
+  notify: Restart MySQL
+
+- name: Install PyMySQL for MySQL
+  apt: 
+    name: python3-pymysql
+    state: latest
+    update_cache: yes
+
+- name: Create MySQL database
+  mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create application user
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
