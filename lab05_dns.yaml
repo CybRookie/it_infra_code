@@ -1,0 +1,16 @@
+---
+- name: Gather facts
+  hosts: all
+  tasks:
+    - setup:
+- name: DNS server
+  hosts: dns_servers
+  become: yes
+  roles:
+    - dns
+
+- name: DNS configuration
+  hosts: dns_config
+  become: yes
+  roles:
+    - dns_config

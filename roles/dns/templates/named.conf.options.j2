@@ -1,0 +1,20 @@
+acl allowed_networks { {%- for network in allowed_networks -%}
+			  {{ network }};
+			{%- endfor -%}
+		      };
+
+options {
+    directory "/var/cache/bind";
+    forwarders {
+      {%- for address in dns_forwarders -%}
+        {{ address }};
+      {%- endfor -%}
+    };
+    dnssec-validation no;
+    auth-nxdomain no;    # conform to RFC1053
+};
+
+zone "dystopia.net" {
+     type master;
+     file "/etc/bind/db.dystopia";
+};

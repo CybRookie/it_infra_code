@@ -8,3 +8,10 @@ my_vm
 
 [db_servers]
 my_vm2
+
+[dns_servers]
+my_vm2
+
+[dns_config]
+my_vm
+my_vm2
