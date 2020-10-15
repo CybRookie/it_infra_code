@@ -1,0 +1,12 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: Change Nginx's default configuration
+  template:
+    src: secondary_default.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Restart Nginx

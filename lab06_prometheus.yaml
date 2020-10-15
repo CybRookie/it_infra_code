@@ -1,0 +1,20 @@
+---
+- name: Prometheus
+  hosts: prometheus
+  become: yes
+  roles:
+    - prometheus
+
+- name: Node exporters
+  hosts: node_exporters
+  gather_facts: false
+  become: yes
+  roles:
+    - node_exporters
+
+- name: Install and configure non-Prometheus VM's Nginx
+  hosts: vm2
+  gather_facts: false
+  become: yes
+  roles:
+    - secondary_nginx

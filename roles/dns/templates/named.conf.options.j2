@@ -14,7 +14,7 @@ options {
     auth-nxdomain no;    # conform to RFC1053
 };
 
-zone "dystopia.net" {
+zone "{{ domain_name }}" {
      type master;
      file "/etc/bind/db.dystopia";
 };

@@ -1,0 +1,31 @@
+---
+- name: Install Prometheus
+  apt:
+    name: prometheus
+    update_cache: yes
+
+- name: Duplicate Prometheus' service configration
+  copy:
+    src: /lib/systemd/system/prometheus.service
+    dest: /etc/systemd/system/
+    remote_src: yes
+
+- name: Configure Prometheus' web path
+  lineinfile:
+    dest: /etc/systemd/system/prometheus.service
+    regex: 'ExecStart='
+    line: "ExecStart=/usr/bin/prometheus $ARGS --web.external-url=http://vm1.{{ domain_name }}:11480/prometheus"
+    state: present
+  notify: Restart Prometheus
+
+- name: Configure Prometheus
+  template:
+    src: prometheus.yaml.j2
+    dest: /etc/prometheus/prometheus.yml
+  notify: Restart Prometheus
+
+- name: Reconfigure reverse proxy on the Prometheus VM's Nginx
+  template:
+    src: default.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Restart Nginx

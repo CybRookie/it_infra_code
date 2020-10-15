@@ -1,11 +1,11 @@
 $TTL	604800
-dystopia.net.	IN	SOA	core.dystopia.net. master.dystopia.net. (
+{{ domain_name }}	IN	SOA	vm2.{{ domain_name }} {{ mail_subdomain }}.{{ domain_name }} (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 
-dystopia.net.	IN	NS	core.dystopia.net.
-satellite	IN	A	{{ hostvars['my_vm']['ansible_default_ipv4']['address'] }}
-core		IN	A	{{ hostvars['my_vm2']['ansible_default_ipv4']['address'] }}
+{{ domain_name }}		IN	NS	vm2
+vm1				IN	A	{{ hostvars['vm1']['ansible_default_ipv4']['address'] }}
+vm2				IN	A	{{ hostvars['vm2']['ansible_default_ipv4']['address'] }}
