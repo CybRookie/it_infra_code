@@ -1,3 +1,5 @@
+#Old initial configuration, before Lab 7 - Grafana
+
 server {
 	listen 80 default_server;
         listen [::]:80 default_server;

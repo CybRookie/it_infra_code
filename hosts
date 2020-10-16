@@ -3,6 +3,7 @@ vm2 ansible_host=193.40.156.86 ansible_port=12522 ansible_ssh_user=ubuntu ansibl
 
 [web_servers]
 vm1
+vm2
 
 [app_servers]
 vm1
@@ -23,3 +24,6 @@ vm1
 [node_exporters]
 vm1
 vm2
+
+[grafana]
+vm1

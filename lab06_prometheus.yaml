@@ -17,4 +17,4 @@
   gather_facts: false
   become: yes
   roles:
-    - secondary_nginx
+    - nginx

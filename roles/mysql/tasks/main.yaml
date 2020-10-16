@@ -29,3 +29,4 @@
     priv: "{{ mysql_database }}.*:ALL"
     host: "%"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true

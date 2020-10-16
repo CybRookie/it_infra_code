@@ -18,3 +18,10 @@ zone "{{ domain_name }}" {
      type master;
      file "/etc/bind/db.dystopia";
 };
+
+
+#Since Lab 7 - Grafana, for bind exporter
+
+statistics-channels {
+  inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
+};
