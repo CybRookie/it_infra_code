@@ -3,7 +3,6 @@
   apt: 
     name: bind9
     state: latest
-    update_cache: yes
 
 - name: Override Bind9 configuration
   template:
@@ -14,5 +13,14 @@
 - name: Configure master zone
   template:
     src: db.dystopia.j2
-    dest: /etc/bind/db.dystopia
+    dest: /etc/bind/db.{{ domain_name }}
   notify: Reload rndc
+  
+- name: Configure {{ item }} master zone
+  template:
+    src: db.{{ item }}.j2
+    dest: /etc/bind/db.{{ item }}
+  notify: Reload rndc
+  loop:
+    - vm1
+    - vm2

@@ -15,7 +15,6 @@
   apt:
     name: python3-flask-sqlalchemy
     state: latest
-    update_cache: yes
 
 - name: Download Agama
   get_url:

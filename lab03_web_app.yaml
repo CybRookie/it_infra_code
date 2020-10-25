@@ -1,6 +1,10 @@
 ---
+- name: He who fails to prepare prepares to fail
+  import_playbook: headstart.yaml
+
 - name: Web app
   hosts: app_servers
+  gather_facts: false
   become: yes
   roles:
     - agama

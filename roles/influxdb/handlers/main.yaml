@@ -1,6 +1,6 @@
 ---
-- name: Restart uWSGI
+- name: Restart Telegraf
   service:
-    name: uwsgi
+    name: telegraf
     state: restarted
     enabled: yes

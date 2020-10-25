@@ -3,7 +3,6 @@
   apt:
     name: nginx
     state: latest
-    update_cache: yes
 
 #Lab 2 task
 #- name: Change Nginx's default page

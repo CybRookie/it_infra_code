@@ -1,12 +1,17 @@
 ---
+- name: He who fails to prepare prepares to fail
+  import_playbook: headstart.yaml
+
 - name: Database server
   hosts: db_servers
+  gather_facts: false
   become: yes
   roles:
     - mysql
 
 - name: Web app
-  hosts: web_servers
+  hosts: app_servers
+  gather_facts: false
   become: yes
   roles:
     - agama

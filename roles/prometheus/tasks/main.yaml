@@ -2,7 +2,7 @@
 - name: Install Prometheus
   apt:
     name: prometheus
-    update_cache: yes
+    state: latest
 
 - name: Duplicate Prometheus' service configration
   copy:

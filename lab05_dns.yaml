@@ -1,17 +1,17 @@
 ---
-- name: Gather facts
-  hosts: all
-  tasks:
-    - setup:
+- name: He who fails to prepare prepares to fail
+  import_playbook: headstart.yaml
 
 - name: DNS server
   hosts: dns_servers
+  gather_facts: false
   become: yes
   roles:
     - dns
 
 - name: DNS configuration
   hosts: dns_config
+  gather_facts: false
   become: yes
   roles:
     - dns_config

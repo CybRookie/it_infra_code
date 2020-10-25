@@ -14,11 +14,18 @@ options {
     auth-nxdomain no;    # conform to RFC1053
 };
 
-zone "{{ domain_name }}" {
+zone "{{ domain_name }}{{ top_level_domain }}" {
      type master;
-     file "/etc/bind/db.dystopia";
+     file "/etc/bind/db.{{ domain_name }}";
 };
 
+
+{% for vm in groups['all'] %}
+	zone "{{ hostvars[vm]['inventory_hostname'] }}." {
+     	     type master;
+     	     file "/etc/bind/db.{{ hostvars[vm]['inventory_hostname'] }}";
+};
+{% endfor %}
 
 #Since Lab 7 - Grafana, for bind exporter
 

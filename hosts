@@ -1,5 +1,5 @@
-vm1 ansible_host=193.40.156.86 ansible_port=11422 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
-vm2 ansible_host=193.40.156.86 ansible_port=12522 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+vm1 ansible_host=193.40.156.86 ansible_port=10922 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+vm2 ansible_host=193.40.156.86 ansible_port=8822 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
 
 [web_servers]
 vm1
@@ -27,3 +27,9 @@ vm2
 
 [grafana]
 vm1
+
+[influxdb]
+vm2
+
+[pinger]
+vm2

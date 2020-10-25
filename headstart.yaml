@@ -1,0 +1,11 @@
+---
+- name: Preparations for Ansible run
+  hosts: all
+  become: yes
+  tasks:
+  - name: Update cache
+    apt:
+      update_cache: yes
+  - name: Remove unnecessary packages
+    apt:
+      autoremove: yes

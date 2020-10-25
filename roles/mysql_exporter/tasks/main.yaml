@@ -2,7 +2,7 @@
 - name: Install MySQL exporter
   apt:
     name: prometheus-mysqld-exporter
-    update_cache: yes
+    state: latest
 
 - name: Create MySQL exporter user
   mysql_user:
@@ -10,7 +10,6 @@
     password: "{{ mysql_exporter_pass }}"
     priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  notify: Restart MySQL exporter
   no_log: true
 
 - name: Configure MySQL exporter

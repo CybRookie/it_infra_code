@@ -1,6 +1,6 @@
 ---
-- name: Restart uWSGI
+- name: Restart Rsyslog
   service:
-    name: uwsgi
+    name: rsyslog
     state: restarted
     enabled: yes

@@ -2,23 +2,23 @@
 - name: He who fails to prepare prepares to fail
   import_playbook: headstart.yaml
 
-- name: Prometheus
-  hosts: prometheus
+- name: Install InfluxDB and Telegraf
+  hosts: influxdb
   gather_facts: false
   become: yes
   roles:
-    - prometheus
+    - influxdb
 
-- name: Node exporters
-  hosts: node_exporters
+- name: Configure Rsyslog
+  hosts: all
   gather_facts: false
   become: yes
   roles:
-    - node_exporters
+    - rsyslog
 
-- name: Install and configure non-Prometheus VM's Nginx
-  hosts: vm2
+- name: Transfer and setup pinger sciprt
+  hosts: pinger
   gather_facts: false
   become: yes
   roles:
-    - nginx
+    - pinger

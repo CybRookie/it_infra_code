@@ -5,13 +5,11 @@
       - uwsgi
       - uwsgi-plugin-python3
     state: latest
-    update_cache: yes
 
 - name: Install PyMySQL for uWSGI
   apt:
     name: python3-pymysql
     state: latest
-    update_cache: yes
 
 - name: Add the uWSGI configuration
   template: 
