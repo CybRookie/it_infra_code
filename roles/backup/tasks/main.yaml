@@ -1,0 +1,8 @@
+---
+- name: Add the user "backup" and genereate its keys
+  user:
+    name: backup
+    create_home: yes
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    ssh_key_file: .ssh/id_rsa

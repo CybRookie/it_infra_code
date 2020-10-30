@@ -1,0 +1,17 @@
+---
+- name: He who fails to prepare prepares to fail
+  import_playbook: headstart.yaml
+
+- name: Reconfigure DNS
+  hosts: dns_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - dns
+
+- name: Configure backups
+  hosts: all
+  gather_facts: false
+  become: yes
+  roles:
+    - backup

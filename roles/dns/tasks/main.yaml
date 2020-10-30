@@ -16,7 +16,7 @@
     dest: /etc/bind/db.{{ domain_name }}
   notify: Reload rndc
   
-- name: Configure {{ item }} master zone
+- name: Configure VM1 and VM2 master zones
   template:
     src: db.{{ item }}.j2
     dest: /etc/bind/db.{{ item }}
