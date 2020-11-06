@@ -21,7 +21,7 @@
   gather_facts: false
   become: yes
   roles:
-    - dns
+    - bind
 
 - name: Install Nginx exporter
   hosts: all
