@@ -1,12 +1,12 @@
 $TTL	604800
-{{ domain_name }}{{ top_level_domain }}	IN	SOA	vm2.{{ domain_name }}{{ top_level_domain }} {{ mail_subdomain }}.{{ domain_name }}{{ top_level_domain }} (
+{{ domain_name }}{{ top_level_domain }}.	IN	SOA	vm2.{{ domain_name }}{{ top_level_domain }}. {{ mail_subdomain }}.{{ domain_name }}{{ top_level_domain }}. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 
-{{ domain_name }}{{ top_level_domain }}		IN	NS	vm2.{{ domain_name }}{{ top_level_domain }}
+{{ domain_name }}{{ top_level_domain }}.		IN	NS	vm2.{{ domain_name }}{{ top_level_domain }}.
 vm1.{{ domain_name }}{{ top_level_domain }}		IN	A	{{ hostvars['vm1']['ansible_default_ipv4']['address'] }}
 vm2.{{ domain_name }}{{ top_level_domain }}		IN	A	{{ hostvars['vm2']['ansible_default_ipv4']['address'] }}
 backup.{{ domain_name }}{{ top_level_domain }}	IN	A	{{ backup_ip }}

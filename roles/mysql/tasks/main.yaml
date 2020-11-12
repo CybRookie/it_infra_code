@@ -5,7 +5,8 @@
     state: latest
 
 - name: Override MySQL configuration
-  copy:
+#  copy: - was used before 11th lab
+  template:
     src: override.cnf
     dest: /etc/mysql/mysql.conf.d/
   notify: Restart MySQL
@@ -25,6 +26,17 @@
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"
     priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
+
+# Modifications on 11th lab - MySQL High Availability
+
+- name: Create MySQL replication user
+  mysql_user:
+    name: "{{ mysql_replication_user }}"
+    password: "{{ mysql_replication_pass }}"
+    priv: "*.*:REPLICATION SLAVE"
     host: "%"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   no_log: true

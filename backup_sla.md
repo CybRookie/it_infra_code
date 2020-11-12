@@ -6,7 +6,6 @@ Last time modified: 6th November 2020
 > - added Prometheus to the list of backed up services
 > - added specification of full and incremental backups in the "Backup RPO" section
 > - added the day of the week when the full backup should be done - Sunday morning
-> - added the schedule for the incremental backups
 
 Table of contents:
 

@@ -4,19 +4,27 @@
     name: prometheus
     state: latest
 
-- name: Duplicate Prometheus' service configration
-  copy:
-    src: /lib/systemd/system/prometheus.service
-    dest: /etc/systemd/system/
-    remote_src: yes
+# Old reconfiguration method is deprecated since the 11th lab in favour of templating to achieve idempotency and avoid unnecessary Prometheus restarts
+
+#- name: Duplicate Prometheus' service configration
+#  copy:
+#    src: /lib/systemd/system/prometheus.service
+#    dest: /etc/systemd/system/
+#    remote_src: yes
+
+#- name: Configure Prometheus' web path
+#  lineinfile:
+#    dest: /etc/systemd/system/prometheus.service
+#    regex: 'ExecStart='
+#    line: "ExecStart=/usr/bin/prometheus $ARGS --web.external-url=http://vm1.{{ domain_name }}{{ top_level_domain }}:11480/prometheus"
+#    state: present
+#  notify: Restart Prometheus
 
 - name: Configure Prometheus' web path
-  lineinfile:
+  template:
+    src: prometheus.service.j2
     dest: /etc/systemd/system/prometheus.service
-    regex: 'ExecStart='
-    line: "ExecStart=/usr/bin/prometheus $ARGS --web.external-url=http://vm1.{{ domain_name }}:11480/prometheus"
-    state: present
-  notify: Restart Prometheus
+  notify: Restart Prometheus 
 
 - name: Configure Prometheus
   template:

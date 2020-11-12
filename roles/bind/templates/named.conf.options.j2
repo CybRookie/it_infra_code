@@ -14,7 +14,7 @@ options {
     auth-nxdomain no;    # conform to RFC1053
 };
 
-zone "{{ domain_name }}{{ top_level_domain }}" {
+zone "{{ domain_name }}{{ top_level_domain }}." {
      type master;
      file "/etc/bind/db.{{ domain_name }}";
 };
