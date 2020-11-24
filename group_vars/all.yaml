@@ -73,3 +73,6 @@ prometheus_exporters:
     port: 9119
 
 backup_ip: 192.168.42.39
+
+docker_grafana_port: 3001
+docker_agama_port: 8000

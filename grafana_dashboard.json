@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1605208034769,
+  "iteration": 1606223138386,
   "links": [],
   "panels": [
     {
@@ -93,7 +93,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "expr": "nginx_up",
@@ -150,7 +150,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -266,7 +266,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "pointradius": 1,
       "points": false,
       "renderer": "flot",
@@ -363,7 +363,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -481,7 +481,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "expr": "bind_up",
@@ -534,7 +534,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -650,7 +650,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "pointradius": 0.5,
       "points": false,
       "renderer": "flot",
@@ -768,7 +768,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "expr": "mysql_up",
@@ -825,7 +825,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "expr": "mysql_global_variables_server_id",
@@ -899,7 +899,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "expr": "mysql_global_variables_read_only",
@@ -956,7 +956,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.2",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1085,7 +1085,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.2",
+          "pluginVersion": "7.3.4",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1235,7 +1235,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.2",
+          "pluginVersion": "7.3.4",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1936,7 +1936,7 @@
           "options": {
             "showHeader": true
           },
-          "pluginVersion": "7.3.2",
+          "pluginVersion": "7.3.4",
           "targets": [
             {
               "groupBy": [
@@ -2119,12 +2119,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Dashboard",
   "uid": "1br29l5Gz",
-  "version": 44
+  "version": 46
 }

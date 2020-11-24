@@ -15,14 +15,15 @@ server {
         #Reverse proxy for Agama application
 
         location / {
-		include uwsgi_params;
+        	proxy_pass http://127.0.0.1:{{ docker_agama_port }};
+		#include uwsgi_params;
                 #uwsgi_pass IP_address:Port
-                uwsgi_pass unix:/opt/agama/agama.sock;
+                #uwsgi_pass unix:/opt/agama/agama.sock;
 	}
         {% endif %}
 
         {% if inventory_hostname in groups['web_servers'] %}
-        #Reverse proxy for Nginx statistics
+        #Activate Nginx statistics
 
         location /stub_status {
                 stub_status;
@@ -74,7 +75,8 @@ server {
         #Reverse proxy for Grafana
 
         location /grafana {
-     	        proxy_pass http://127.0.0.1:3000;
+     	        proxy_pass http://127.0.0.1:{{ docker_grafana_port }};
+#     	        proxy_pass http://127.0.0.1:3000; Since Lab 12 - Docker
 	}
         {% endif %}
 }

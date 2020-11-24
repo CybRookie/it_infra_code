@@ -1,13 +1,19 @@
 # Backup restoration procedures for every service and configuration
 
-Last time modified: 6th November 2020  
+Last time modified: 24th November 2020  
+
+> Update:
+> - added restoration procedure for the containerised Grafana
+> - added restoration procedure for the containerised Agama
+> - fixed stop/start service commands for the Grafana service
+> - changed escalation-needed notes
 
 Table of contents:
 
 - [Backup restoration procedures for every service and configuration](#backup-restoration-procedures-for-every-service-and-configuration)
   - [Preamble](#preamble)
   - [Application related services](#application-related-services)
-    - [AGAMA -  application](#agama---application)
+    - [AGAMA -  application](#agama----application)
     - [MySQL - app database](#mysql---app-database)
     - [uWSGI - app server](#uwsgi---app-server)
   - [General services](#general-services)
@@ -59,6 +65,12 @@ To restore **AGAMA application that uses MySQL database** run the following comm
 ansible-playbook ansible-playbook lab04_web_app.yaml
 ```
 
+To restore **containerised AGAMA application that uses MySQL database** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
+
+```bash
+ansible-playbook ansible-playbook lab12_docker.yaml
+```
+
 ### MySQL - app database
 
 To restore **MySQL and its configuration** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
@@ -72,7 +84,7 @@ ansible-playbook ansible-playbook lab10_backups.yaml
 To restore **MySQL databases and their data** run the following commands on the host with MySQL installed:
 
 ```bash
-duplicity --no-encryption restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
+duplicity --no-encryption --force restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
 mysql agama < /home/backup/restore/agama.sql
 
 # To check the results run the next command to show AGAMA database contents
@@ -140,7 +152,7 @@ To restore **Ansible and playbooks** go through the following options on the man
       # If Duplicity is not available on the host - install it
       sudo apt -y install duplicity
 
-      duplicity --no-encryption restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/<ansible_user>/backup/
+      duplicity --no-encryption --force restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/<ansible_user>/backup/
 
       cp -a /home/<ansible_user>/backup/ansible /home/<ansible_user>/
       tar -zxf ansible
@@ -206,10 +218,10 @@ To restore **InfluxDB** run the following commands in the Ansible directory cont
 ansible-playbook ansible-playbook lab08_logging.yaml
 ```
 
-To restore **InfluxDB databases and their data**, **do no start with user "backup", start with user "ubuntu"** run the following commands on the host with InfluxDB installed (escalated privileges are required to stop/start InlfuxDB).
+To restore **InfluxDB databases and their data**, **do no start with user "backup", start with user "ubuntu"** run the following commands on the host with InfluxDB installed (escalated privileges are required to stop/start InlfuxDB and transfer the files to the final destination with `rsync`).
 
 ```bash
-duplicity --no-encryption restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
+duplicity --no-encryption --force restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
 sudo systemctl stop influxdb
 influxd restore -metadir /var/lib/influxdb/meta /home/backup/restore/influxdb
 influxd restore -datadir /var/lib/influxdb/data /home/backup/restore/influxdb
@@ -227,14 +239,32 @@ To restore **Grafana** run the following commands in the Ansible directory conta
 ansible-playbook ansible-playbook lab07_grafana.yaml
 ```
 
-To restore **Grafana's configuration**, **do no start with user "backup", start with user "ubuntu"** run the following commands on the host with Grafana installed (escalated privileges are required to stop/start Grafana).
+To restore **containerised Grafana** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
 
 ```bash
-duplicity --no-encryption restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
-sudo systemctl stop prometheus
+ansible-playbook ansible-playbook lab12_docker.yaml
+```
+
+To restore **Grafana's configuration**, **do no start with user "backup", start with user "ubuntu"** run the following commands on the host with Grafana installed (escalated privileges are required to stop/start Grafana and transfer the files to the final destination with `rsync`).
+
+```bash
+duplicity --no-encryption --force restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
+sudo systemctl stop grafana-server
 rsync -a --delete /home/backup/backup/grafana.etc/ /etc/grafana/
 rsync -a --delete home/backup/backup/grafana.lib/ /var/lib/grafana/
-sudo systemctl start prometheus
+sudo systemctl start grafana-server
+```
+
+Run the following commands if the configuration should be restored for the **Grafana Docker container**, **do no start with user "backup", start with user "ubuntu"** (escalated privileges are required to change file permissions and transfer the files to the final destination with `rsync`):
+
+```bash
+duplicity --no-encryption --force restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
+docker stop grafana
+rsync -a --delete /home/backup/backup/grafana.docker.etc/grafana-etc/ /opt/docker/grafana-etc/
+rsync -a --delete home/backup/backup/grafana.docker.lib/grafana/ /opt/docker/grafana/
+chown -R 472:472 /opt/docker/grafana-etc
+chown -R 472:472 /opt/docker/grafana
+docker start grafana
 ```
 
 ### Pinger - connectivity/latency checker
@@ -253,10 +283,10 @@ To restore **Prometheus** run the following commands in the Ansible directory co
 ansible-playbook ansible-playbook lab06_prometheus.yaml
 ```
 
-To restore **Prometheus databases and their data**, **do no start with user "backup", start with user "ubuntu"** run the following commands on the host with Prometheus installed (escalated privileges are required to stop/start Prometheus).
+To restore **Prometheus databases and their data**, **do no start with user "backup", start with user "ubuntu"** run the following commands on the host with Prometheus installed (escalated privileges are required to stop/start Prometheus and transfer the files to the final destination with `rsync`).
 
 ```bash
-duplicity --no-encryption restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
+duplicity --no-encryption --force restore rsync://<backup_user>@<our_domain>//home/<backup_user> /home/backup/restore/
 sudo systemctl stop prometheus
 rsync -a --delete /home/backup/backup/prometheus/ /var/lib/prometheus/
 sudo systemctl start prometheus

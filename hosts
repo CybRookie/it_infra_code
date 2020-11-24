@@ -34,3 +34,6 @@ vm2
 
 [pinger]
 vm2
+
+[docker]
+vm1

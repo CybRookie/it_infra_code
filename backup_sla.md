@@ -1,11 +1,9 @@
 # Backup services SLA
 
-Last time modified: 6th November 2020  
+Last time modified: 20th November 2020  
 
 > Update:
-> - added Prometheus to the list of backed up services
-> - added specification of full and incremental backups in the "Backup RPO" section
-> - added the day of the week when the full backup should be done - Sunday morning
+> - updated the list of the services in the infrastructure
 
 Table of contents:
 
@@ -34,7 +32,10 @@ This SLA describes the backup approach for all services in the infrastructure:
 - App services - **Agama**
 - Database services - **MySQL, InfluxDB**
 - DNS service - **Bind9**
-- Monitoring services - **Prometheus, Grafana, Telegraf**
+- Monitoring services - **Prometheus, Grafana, Telegraf, Pinger, Bind9 exporter, MySQL exporter, Nginx exporters, Node exporters, Rsyslog**
+- Backup services - **Scripts, Duplicity**
+- Containerisation services - **Docker**
+- Additional services - **Ansible, uWSGI, Cron**
 - Ansible repository - <https://github.com/CybRookie/ica0002> (stores configuration, roles, playbooks to configure all the above-mentioned services)
 
 Descriptions of backup approaches contain information on specific backup attributes, such as:

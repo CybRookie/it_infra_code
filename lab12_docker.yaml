@@ -1,0 +1,45 @@
+---
+- name: He who fails to prepare prepares to fail
+  import_playbook: headstart.yaml
+
+- name: Update Nginx configuration
+  hosts: web_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - nginx
+
+- name: Update DNS configuration
+  hosts: dns_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - bind
+
+- name: Update backup facility configuration
+  hosts: all
+  gather_facts: false
+  become: yes
+  roles:
+    - backup
+
+- name: Install docker
+  hosts: docker
+  gather_facts: false
+  become: yes
+  roles:
+    - docker
+
+- name: Setup Grafana Docker container
+  hosts: grafana
+  gather_facts: false
+  become: yes
+  roles:
+    - grafana_docker
+
+- name: Setup Agama Docker container
+  hosts: app_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - agama_docker

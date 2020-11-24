@@ -2,13 +2,14 @@
 - name: He who fails to prepare prepares to fail
   import_playbook: headstart.yaml
 
+# Commented out since Lab 12 - Docker
 - name: Setup Nginx, Agama, uWSGI and MySQL setup role
   hosts: app_servers
   gather_facts: false
   become: yes
   roles:
-    - agama
-    - uwsgi
+#    - agama
+#    - uwsgi
     - nginx
 
 - name: Setup MySQL
@@ -66,12 +67,13 @@
   roles:
     - mysql_exporter
 
-- name: Setup Grafana
-  hosts: grafana
-  gather_facts: false
-  become: yes
-  roles:
-    - grafana
+# Commented out since Lab 12 - Docker
+#- name: Setup Grafana
+#  hosts: grafana
+#  gather_facts: false
+#  become: yes
+#  roles:
+#    - grafana
 
 - name: Setup backup facility
   hosts: all

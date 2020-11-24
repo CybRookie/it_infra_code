@@ -9,11 +9,12 @@
   roles:
     - mysql
 
+# Commented out since Lab 12 - Docker
 - name: Web app
   hosts: app_servers
   gather_facts: false
   become: yes
   roles:
-    - agama
-    - uwsgi
+#    - agama
+#    - uwsgi
     - nginx
