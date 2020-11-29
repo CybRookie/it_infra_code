@@ -1,12 +1,13 @@
 # Backup restoration procedures for every service and configuration
 
-Last time modified: 24th November 2020  
+Last time modified: 29th November 2020  
 
 > Update:
-> - added restoration procedure for the containerised Grafana
-> - added restoration procedure for the containerised Agama
-> - fixed stop/start service commands for the Grafana service
-> - changed escalation-needed notes
+> - added restoration procedure for the Docker
+> - added restoration procedure for the HAProxy
+> - added restoration procedure for the keepalived
+> - added restoration procedure for the containerised HAProxy exporter
+> - added restoration procedure for the keepalived exporter
 
 Table of contents:
 
@@ -24,6 +25,7 @@ Table of contents:
     - [Duplicity - backup facility](#duplicity---backup-facility)
     - [Cron - time scheduler](#cron---time-scheduler)
     - [Nginx - web server](#nginx---web-server)
+    - [Docker - containerisation service](#docker---containerisation-service)
   - [Monitoring related services](#monitoring-related-services)
     - [InfluxDB - metrics/logs database](#influxdb---metricslogs-database)
     - [Grafana - monitoring visualization](#grafana---monitoring-visualization)
@@ -33,8 +35,13 @@ Table of contents:
       - [MySQL exporter](#mysql-exporter)
       - [Nginx exporters](#nginx-exporters)
       - [Node exporters](#node-exporters)
+      - [HAProxy exporters](#haproxy-exporters)
+      - [keepalived exporters](#keepalived-exporters)
     - [Rsyslog - syslog facility](#rsyslog---syslog-facility)
     - [Telegraf - metrics collector](#telegraf---metrics-collector)
+  - [Load balancing related services](#load-balancing-related-services)
+    - [HAProxy - TCP/HTTP load balancer](#haproxy---tcphttp-load-balancer)
+    - [keepalived - Layer 4 load balancer](#keepalived---layer-4-load-balancer)
 
 ## Preamble
 
@@ -208,6 +215,14 @@ To restore **Nginx** run the following commands in the Ansible directory contain
 ansible-playbook ansible-playbook lab02_web_server.yaml
 ```
 
+### Docker - containerisation service
+
+To restore **Docker** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
+
+```bash
+ansible-playbook ansible-playbook lab12_docker.yaml
+```
+
 ## Monitoring related services
 
 ### InfluxDB - metrics/logs database
@@ -324,6 +339,22 @@ To restore **Node exporters** run the following commands in the Ansible director
 ansible-playbook ansible-playbook lab06_prometheus.yaml
 ```
 
+#### HAProxy exporters
+
+To restore **HAProxy exporters** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
+
+```bash
+ansible-playbook ansible-playbook lab13_haproxy.yaml
+```
+
+#### keepalived exporters
+
+To restore **keepalived exporters** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
+
+```bash
+ansible-playbook ansible-playbook lab13_haproxy.yaml
+```
+
 ### Rsyslog - syslog facility
 
 To restore **Rsyslog** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
@@ -338,5 +369,23 @@ To restore **Telegraf** run the following commands in the Ansible directory cont
 
 ```bash
 ansible-playbook ansible-playbook lab08_logging.yaml
+```
+
+## Load balancing related services
+
+### HAProxy - TCP/HTTP load balancer
+
+To restore **HAProxy** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
+
+```bash
+ansible-playbook ansible-playbook lab13_haproxy.yaml
+```
+
+### keepalived - Layer 4 load balancer
+
+To restore **keepalived** run the following commands in the Ansible directory containing playbooks on the management host/system (or the system where playbooks were restored):
+
+```bash
+ansible-playbook ansible-playbook lab13_haproxy.yaml
 ```
 

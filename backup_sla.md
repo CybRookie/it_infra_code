@@ -1,6 +1,6 @@
 # Backup services SLA
 
-Last time modified: 20th November 2020  
+Last time modified: 29th November 2020  
 
 > Update:
 > - updated the list of the services in the infrastructure
@@ -32,9 +32,10 @@ This SLA describes the backup approach for all services in the infrastructure:
 - App services - **Agama**
 - Database services - **MySQL, InfluxDB**
 - DNS service - **Bind9**
-- Monitoring services - **Prometheus, Grafana, Telegraf, Pinger, Bind9 exporter, MySQL exporter, Nginx exporters, Node exporters, Rsyslog**
+- Monitoring services - **Prometheus, Grafana, Telegraf, Pinger, Bind9 exporter, MySQL exporter, Nginx exporters, Node exporters, Rsyslog, HAProxy exporter, keepalived exporter**
 - Backup services - **Scripts, Duplicity**
 - Containerisation services - **Docker**
+- Load balancing services - **HAProxy, keepalived**
 - Additional services - **Ansible, uWSGI, Cron**
 - Ansible repository - <https://github.com/CybRookie/ica0002> (stores configuration, roles, playbooks to configure all the above-mentioned services)
 

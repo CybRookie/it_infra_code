@@ -1,0 +1,34 @@
+---
+- name: Install HAProxy
+  apt:
+    name: haproxy
+    state: latest
+
+- name: Configure HAProxy
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: Restart HAProxy
+
+#- name: Install HAProxy exporter
+#  apt:
+#    name: haproxy_exporter
+#    state: latest
+
+- name: Setup HAProxy exporter on VM1
+  docker_container:
+    name: haproxy_exporter
+    image: quay.io/prometheus/haproxy-exporter:v0.9.0
+    ports:
+      - "{{ docker_haproxy_exporter_port }}:9101"
+    command: --haproxy.scrape-uri="http://vm1:{{ haproxy_port }}/haproxy?stats;csv"
+  when: inventory_hostname == "vm1"
+
+- name: Setup HAProxy exporter on VM2
+  docker_container:
+    name: haproxy_exporter
+    image: quay.io/prometheus/haproxy-exporter:v0.9.0
+    ports:
+      - "{{ docker_haproxy_exporter_port }}:9101"
+    command: --haproxy.scrape-uri="http://vm2:{{ haproxy_port }}/haproxy?stats;csv"
+  when: inventory_hostname == "vm2"

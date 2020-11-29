@@ -7,6 +7,7 @@ vm2
 
 [app_servers]
 vm1
+vm2
 
 [db_servers]
 vm1
@@ -37,3 +38,8 @@ vm2
 
 [docker]
 vm1
+vm2
+
+[haproxy]
+vm1
+vm2

@@ -76,3 +76,7 @@ backup_ip: 192.168.42.39
 
 docker_grafana_port: 3001
 docker_agama_port: 8000
+haproxy_port: 88
+docker_haproxy_exporter_port: 9101
+keepalived_exporter_port: 9165
+agama_container_per_vm: 1

@@ -79,4 +79,30 @@ server {
 #     	        proxy_pass http://127.0.0.1:3000; Since Lab 12 - Docker
 	}
         {% endif %}
+
+# Reverse proxy HAProxy and keepalived exporter metrics since Lab 13 - HAProxy
+      
+        {% if inventory_hostname in groups['haproxy'] %}
+        #Reverse proxy for HAProxy exporter
+
+        location /haproxy-metrics {
+     	        proxy_pass http://127.0.0.1:{{ docker_haproxy_exporter_port }}/metrics;
+	}
+        {% endif %}
+        
+        {% if inventory_hostname in groups['haproxy'] %}
+        #Reverse proxy for keepalived exporter
+
+        location /keepalived-metrics {
+     	        proxy_pass http://127.0.0.1:{{ keepalived_exporter_port }}/metrics;
+	}
+        {% endif %}
+        
+        {% if inventory_hostname in groups['haproxy'] %}
+        #Reverse proxy for HAProxy
+
+        location /haproxy {
+     	        proxy_pass http://127.0.0.1:{{ haproxy_port }}/haproxy?stats;
+	}
+        {% endif %}
 }

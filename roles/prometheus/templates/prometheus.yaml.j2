@@ -44,3 +44,19 @@ scrape_configs:
 #            - {{ hostvars[vm]['inventory_hostname'] }}.{{ domain_name }}{{ top_level_domain }}:{{ prometheus_exporters['bind']['port'] }}
             - {{ hostvars[vm]['inventory_hostname'] }}:{{ prometheus_exporters['bind']['port'] }}
           {% endfor %}
+
+#New jobs for Lab 13 - HAProxy
+
+  - job_name: haproxy_exporter
+    static_configs:
+      - targets:
+          {% for vm in groups['haproxy'] %}
+            - {{ hostvars[vm]['inventory_hostname'] }}:{{ docker_haproxy_exporter_port }}
+          {% endfor %}
+
+  - job_name: keepalived_exporter
+    static_configs:
+      - targets:
+          {% for vm in groups['haproxy'] %}
+            - {{ hostvars[vm]['inventory_hostname'] }}:{{ keepalived_exporter_port }}
+          {% endfor %}
