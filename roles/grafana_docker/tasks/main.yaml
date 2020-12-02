@@ -22,3 +22,4 @@
     volumes:
       - /opt/docker/grafana:/var/lib/grafana/
       - /opt/docker/grafana-etc:/etc/grafana/
+    restart_policy: always

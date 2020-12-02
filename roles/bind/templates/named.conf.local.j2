@@ -1,0 +1,32 @@
+{% if inventory_hostname in groups['dns_masters'] %}
+
+# Configuration for the DNS master servers
+
+zone "{{ domain_name }}{{ top_level_domain }}." {
+     type master;
+     file "/var/lib/bind/db.{{ domain_name }}";
+     allow-transfer { key {{ dns_transfer_key_name }}; };
+     allow-update { key {{ dns_update_key_name }}; };
+};
+{% endif %}
+{% if inventory_hostname in groups['dns_slaves'] %}
+
+# Configuration for the DNS slave servers
+
+{% for vm in groups['dns_masters'] %}
+     		server {{ hostvars[vm]['ansible_default_ipv4']['address'] }} {
+			keys { {{ dns_transfer_key_name }}; };
+		};
+{% endfor %}
+
+zone "{{ domain_name }}{{ top_level_domain }}." {
+     type slave;
+     file "/var/lib/bind/db.{{ domain_name }}";
+     masters {
+     	{% for vm in groups['dns_masters'] %}
+     		{{ hostvars[vm]['ansible_default_ipv4']['address'] }};
+     	{% endfor %}
+     };
+};
+{% endif %}
+

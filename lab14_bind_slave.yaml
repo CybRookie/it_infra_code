@@ -1,0 +1,32 @@
+---
+- name: He who fails to prepare prepares to fail
+  import_playbook: headstart.yaml
+
+- name: Update Nginx configuration
+  hosts: web_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - nginx
+  
+- name: Update DNS configuration and install Bind9, and DNS exporter on VM1
+  hosts: dns_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - bind
+    - bind_exporter
+
+- name: Update hosts' DNS configuration
+  hosts: dns_config
+  gather_facts: false
+  become: yes
+  roles:
+    - dns_config
+
+- name: Reconfigure Prometheus
+  hosts: prometheus
+  gather_facts: false
+  become: yes
+  roles:
+    - prometheus

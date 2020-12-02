@@ -22,6 +22,7 @@
     ports:
       - "{{ docker_haproxy_exporter_port }}:9101"
     command: --haproxy.scrape-uri="http://vm1:{{ haproxy_port }}/haproxy?stats;csv"
+    restart_policy: always
   when: inventory_hostname == "vm1"
 
 - name: Setup HAProxy exporter on VM2
@@ -31,4 +32,5 @@
     ports:
       - "{{ docker_haproxy_exporter_port }}:9101"
     command: --haproxy.scrape-uri="http://vm2:{{ haproxy_port }}/haproxy?stats;csv"
+    restart_policy: always
   when: inventory_hostname == "vm2"

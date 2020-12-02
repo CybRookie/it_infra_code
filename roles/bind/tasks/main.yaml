@@ -1,26 +1,60 @@
 ---
-- name: Install Bind9 DNS
+- name: Install Bind9 DNS and dnspython
   apt: 
-    name: bind9
+    name:
+      - bind9
+      - python3-dnspython
     state: latest
 
-- name: Override Bind9 configuration
+- name: Override master Bind9 configuration
   template:
     src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
   notify: Restart Bind9
 
+- name: Override Bind9 zones configuration
+  template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify: Restart Bind9
+
 - name: Configure master zone
   template:
     src: db.dystopia.j2
-    dest: /etc/bind/db.{{ domain_name }}
+    dest: /var/lib/bind/db.{{ domain_name }}
+    force: no
   notify: Reload rndc
-  
-- name: Configure VM1 and VM2 master zones
-  template:
-    src: db.{{ item }}.j2
-    dest: /etc/bind/db.{{ item }}
-  notify: Reload rndc
-  loop:
-    - vm1
-    - vm2
+  when: inventory_hostname in groups['dns_masters']
+
+# Before mdoification of the domain database - run handlers
+
+- name: Execute handlers preemptively
+  meta: flush_handlers
+
+# Modifications of the primary domain database
+
+- name: Add A record for the services' subdomains to the primary domain database
+  nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "{{ dns_update_key_name }}"
+    key_secret: "{{ dns_update_key }}"
+    server: "{{ hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ domain_name }}{{ top_level_domain }}."
+    record: "{{ item['subdomain'] }}.{{ domain_name }}{{ top_level_domain }}."
+    value: "{{ item['ip'] }}"
+    type: "A"
+  loop: "{{ a_records }}"
+  when: inventory_hostname == groups['dns_masters'][0]
+
+- name: Add CNAME record for service's subdomains to the primary domain database
+  nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "{{ dns_update_key_name }}"
+    key_secret: "{{ dns_update_key }}"
+    server: "{{ hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ domain_name }}{{ top_level_domain }}."
+    record: "{{ item['cname'] }}.{{ domain_name }}{{ top_level_domain }}."
+    value: "{{ item['real'] }}.{{ domain_name }}{{ top_level_domain }}."
+    type: "CNAME"
+  loop: "{{ dns_cnames }}"
+  when: inventory_hostname == groups['dns_masters'][0]

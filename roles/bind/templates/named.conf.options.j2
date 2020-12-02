@@ -1,7 +1,19 @@
+# Since Lab 14 - HA DNS, keys for server authetication
+
+key "{{ dns_transfer_key_name }}" {
+	algorithm hmac-sha256;
+	secret "{{ dns_transfer_key }}";
+};
+
+key "{{ dns_update_key_name }}" {
+	algorithm hmac-sha256;
+	secret "{{ dns_update_key }}";
+};
+
 acl allowed_networks { {%- for network in allowed_networks -%}
 			  {{ network }};
 			{%- endfor -%}
-		      };
+};
 
 options {
     directory "/var/cache/bind";
@@ -13,19 +25,6 @@ options {
     dnssec-validation no;
     auth-nxdomain no;    # conform to RFC1053
 };
-
-zone "{{ domain_name }}{{ top_level_domain }}." {
-     type master;
-     file "/etc/bind/db.{{ domain_name }}";
-};
-
-
-{% for vm in groups['all'] %}
-	zone "{{ hostvars[vm]['inventory_hostname'] }}." {
-     	     type master;
-     	     file "/etc/bind/db.{{ hostvars[vm]['inventory_hostname'] }}";
-};
-{% endfor %}
 
 #Since Lab 7 - Grafana, for bind exporter
 

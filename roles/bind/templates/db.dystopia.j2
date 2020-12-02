@@ -6,9 +6,10 @@ $TTL	604800
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 
-{{ domain_name }}{{ top_level_domain }}.				IN	NS	vm2.{{ domain_name }}{{ top_level_domain }}.
-vm1.{{ domain_name }}{{ top_level_domain }}.				IN	A	{{ hostvars['vm1']['ansible_default_ipv4']['address'] }}
-vm2.{{ domain_name }}{{ top_level_domain }}.				IN	A	{{ hostvars['vm2']['ansible_default_ipv4']['address'] }}
-backup.{{ domain_name }}{{ top_level_domain }}.			IN	A	{{ backup_ip }}
-influxdb.{{ domain_name }}{{ top_level_domain }}.			IN	CNAME	vm2.{{ domain_name }}{{ top_level_domain }}.
-prometheus.{{ domain_name }}{{ top_level_domain }}.			IN	CNAME	vm1.{{ domain_name }}{{ top_level_domain }}.
+{% for vm in groups['dns_servers'] %}
+{{ domain_name }}{{ top_level_domain }}.	IN	NS	{{ vm }}.{{ domain_name }}{{ top_level_domain }}.
+{% endfor %}
+{% for vm in hostvars %}
+{{ hostvars[vm]['inventory_hostname'] }}.{{ domain_name }}{{ top_level_domain }}.	IN	A	{{ hostvars[vm]['ansible_default_ipv4']['address'] }}
+{% endfor %}
+
