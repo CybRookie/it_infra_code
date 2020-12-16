@@ -12,6 +12,14 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   no_log: true
 
+- name: Create Pormetheus directory
+  file:
+    path: /var/lib/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+
 - name: Configure MySQL exporter
   template:
     src: my.cnf.j2
@@ -20,3 +28,18 @@
     group: prometheus
     mode: '0400'
   notify: Restart MySQL exporter
+
+# Before starting the service - run handlers
+
+- name: Execute handlers preemptively
+  meta: flush_handlers
+
+- name: Sleep for 10 seconds and continue with play
+  wait_for:
+    timeout: 10
+
+- name: Check if the service is started and if it is not, start it
+  service:
+    name: prometheus-mysqld-exporter
+    state: started
+    enabled: yes

@@ -28,6 +28,7 @@
     name: agama
     build:
       path: /opt/agama
+      network: host
     source: build
 
 - name: Setup Agama container

@@ -7,4 +7,3 @@
 
 - name: Reload rndc
   shell: rndc reload
-  

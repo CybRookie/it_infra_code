@@ -41,7 +41,7 @@ db_url=$(grep "^database_url=" /etc/pinger/pinger.conf | sed 's/^.*=//')
 
 db_dn=$(grep -v "[]^\!@#$%()[{}|_=+\`\"\'~?<>,\ -]" <<<"$db_url" | sed 's/\(^http:\/\/\)\([a-z\.]*\)\(:8086\)/\2/')
 local_ip=$(hostname -I)
-looked_up_ip=$(dig vm2.{{ domain_name }}{{ top_level_domain }} +short)
+looked_up_ip=$(dig {{ groups['influxdb'][0] }}.{{ domain_name }}{{ top_level_domain }} +short)
 protocol=$(grep "^http://" <<<"$db_url")
 
 if [ ! "$db_dn" ] || [ ! "$protocol" ] || [ "$local_ip" = "$looked_up_ip" ]; then

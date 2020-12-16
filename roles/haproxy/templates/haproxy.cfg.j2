@@ -40,7 +40,7 @@ listen haproxy_node
 	bind :{{ haproxy_port }}
 	stats enable
 	stats uri /haproxy?stats
-{% for vm in groups['web_servers'] %}
+{% for vm in groups['haproxy'] %}
 {% for i in range(agama_container_per_vm) %}
 	server {{ vm }}_{{ i }} {{ vm }}:{{ docker_agama_port }} check
 {% endfor %} 

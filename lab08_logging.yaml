@@ -16,7 +16,7 @@
   roles:
     - rsyslog
 
-- name: Transfer and setup pinger sciprt
+- name: Transfer and setup pinger script
   hosts: pinger
   gather_facts: false
   become: yes

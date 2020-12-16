@@ -10,3 +10,18 @@
     src: 51-telegraf.conf.j2
     dest: /etc/rsyslog.d/51-telegraf.conf
   notify: Restart Rsyslog
+
+# Before starting the service - run handlers
+
+- name: Execute handlers preemptively
+  meta: flush_handlers
+
+- name: Sleep for 10 seconds and continue with play
+  wait_for:
+    timeout: 10
+
+- name: Check if the service is started and if it is not, start it
+  service:
+    name: rsyslog
+    state: started
+    enabled: yes

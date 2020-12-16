@@ -4,7 +4,7 @@
 
 zone "{{ domain_name }}{{ top_level_domain }}." {
      type master;
-     file "/var/lib/bind/db.{{ domain_name }}";
+     file "/var/lib/bind/{{ domain_database }}";
      allow-transfer { key {{ dns_transfer_key_name }}; };
      allow-update { key {{ dns_update_key_name }}; };
 };
@@ -21,7 +21,7 @@ zone "{{ domain_name }}{{ top_level_domain }}." {
 
 zone "{{ domain_name }}{{ top_level_domain }}." {
      type slave;
-     file "/var/lib/bind/db.{{ domain_name }}";
+     file "/var/lib/bind/{{ domain_database }}";
      masters {
      	{% for vm in groups['dns_masters'] %}
      		{{ hostvars[vm]['ansible_default_ipv4']['address'] }};

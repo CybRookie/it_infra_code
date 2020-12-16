@@ -1,1 +1,1 @@
-action(type="omfwd" Protocol="udp" Target="vm2.{{ domain_name }}{{ top_level_domain }}" Port="6514" Template="RSYSLOG_SyslogProtocol23Format")
+action(type="omfwd" Protocol="udp" Target="{{ groups['internal'][0] }}.{{ domain_name }}{{ top_level_domain }}" Port="6514" Template="RSYSLOG_SyslogProtocol23Format")

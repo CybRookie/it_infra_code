@@ -1,0 +1,19 @@
+# Configure backup user's groups
+
+- name: Add the user to the Prometheus and Grafana groups on the management VM
+  user:
+    name: backup
+    groups: 472,prometheus
+  when: inventory_hostname == groups['grafana'][0]
+
+- name: Add the user to the InfluxDB group on the management VM
+  user:
+    name: backup
+    groups: influxdb
+  when: inventory_hostname == groups['influxdb'][0]
+
+- name: Add the user to the MySQL group on the master MySQL instance
+  user:
+    name: backup
+    groups: mysql
+  when: inventory_hostname == groups['db_masters'][0]

@@ -1,0 +1,147 @@
+---
+### Update repository information once in 24h, autoremove unused dependecies
+
+- name: He who fails to prepare prepares to fail
+  import_playbook: headstart.yaml
+
+### Roles were marked based on which hosts they are played
+### At the start, general services and specififc to the management instance are installed
+### In the second half the services specific to the application instances are installed
+
+# All
+- name: Setup Bind9 DNS and Bind9 Prometheus exporter
+  hosts: dns_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - bind
+    - bind_exporter
+  tags: bind
+
+# All
+- name: Update hosts' DNS configuration
+  hosts: dns_config
+  gather_facts: false
+  become: yes
+  roles:
+    - dns_config
+  tags: resolve
+
+#Management instance
+- name: Setup Prometheus
+  hosts: prometheus
+  gather_facts: false
+  become: yes
+  roles:
+    - prometheus
+  tags: prometheus
+
+#All
+- name: Setup Prometheus Node exporters
+  hosts: node_exporters
+  gather_facts: false
+  become: yes
+  roles:
+    - node_exporters
+  tags: node
+
+#All
+- name: Setup Nginx frontend and Nginx Prometheus exporters
+  hosts: web_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - nginx
+    - nginx_exporter
+  tags: nginx
+
+#Management instance
+- name: Setup InfluxDB and Telegraf
+  hosts: influxdb
+  gather_facts: false
+  become: yes
+  roles:
+    - influxdb
+  tags: influxdb
+
+#All
+- name: Reconfigure Rsyslog
+  hosts: all
+  gather_facts: false
+  become: yes
+  roles:
+    - rsyslog
+  tags: rsyslog
+
+#Management instance
+- name: Transfer and setup pinger script
+  hosts: pinger
+  gather_facts: false
+  become: yes
+  roles:
+    - pinger
+  tags: pinger
+
+#All
+- name: Setup Docker
+  hosts: docker
+  gather_facts: false
+  become: yes
+  roles:
+    - docker
+  tags: docker
+
+#Management instance
+- name: Setup Grafana Docker container
+  hosts: grafana
+  gather_facts: false
+  become: yes
+  roles:
+    - grafana_docker
+  tags: grafana
+
+#Application instances
+- name: Setup MySQL and MySQL Prometheus exporter
+  hosts: db_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - mysql
+    - mysql_exporter
+  tags: mysql
+
+#Application instances
+- name: Setup Agama Docker container
+  hosts: app_servers
+  gather_facts: false
+  become: yes
+  roles:
+    - agama_docker
+  tags: agama
+
+#Application instances
+- name: Setup HAProxy and containerised HAProxy Prometheus exporter
+  hosts: haproxy
+  gather_facts: false
+  become: yes
+  roles:
+    - haproxy
+  tags: haproxy
+
+#Application instances
+- name: Setup keepalived and keepalived Prometheus exporter
+  hosts: haproxy
+  gather_facts: false
+  become: yes
+  roles:
+    - keepalived
+  tags: keepalived
+
+#All
+- name: Setup backup facilities and upload of backups
+  hosts: all
+  gather_facts: false
+  become: yes
+  roles:
+    - backup
+  tags: backup

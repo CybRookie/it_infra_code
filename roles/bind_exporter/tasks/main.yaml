@@ -4,7 +4,11 @@
     name: prometheus-bind-exporter
     state: latest
 
-- name: Enable Bind9 exporter
+- name: Sleep for 10 seconds and continue with play
+  wait_for:
+    timeout: 10
+
+- name: Enable and start Bind9 exporter
   service:
     name: prometheus-bind-exporter
     state: started

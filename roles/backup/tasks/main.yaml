@@ -6,8 +6,20 @@
     generate_ssh_key: yes
     ssh_key_bits: 4096
     ssh_key_file: .ssh/id_rsa
+    state: present
+  notify:
+    - Add the user to the Prometheus and Grafana groups on the management VM
+    - Add the user to the InfluxDB group on the management VM
+    - Add the user to the MySQL group on the master MySQL instance
 
-# Add MySQL backup user and MySQL cnf file
+- name: Create a group "472" for Grafana backups
+  group: 
+    name: "472"
+    gid: 472
+    state: present
+  when: inventory_hostname == groups['grafana'][0]
+
+# Add MySQL backup user and MySQL cnf file on the master MySQL instance
 
 - name: Create MySQL backup user
   mysql_user:
@@ -17,7 +29,7 @@
     host: "localhost"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   no_log: true
-  when: inventory_hostname == "vm2"
+  when: inventory_hostname == groups['db_masters'][0]
 
 - name: Copy MySQL configuration file
   template:
@@ -26,21 +38,7 @@
     owner: backup
     group: backup
     mode: '0400'
-  when: inventory_hostname == "vm2"
-
-# Configure backup user's groups
-
-- name: Add the user to the Prometheus and Grafana groups on the VM1
-  user:
-    name: backup
-    groups: grafana,prometheus
-  when: inventory_hostname == "vm1"
-
-- name: Add the user to the InfluxDB and MySQL groups on the VM2
-  user:
-    name: backup
-    groups: mysql,influxdb
-  when: inventory_hostname == "vm2"
+  when: inventory_hostname == groups['db_masters'][0]
 
 # Task to create required directories and backup scripts
 
@@ -63,7 +61,7 @@
     owner: backup
     group: backup
     mode: '0755'
-  when: inventory_hostname == "vm2"
+  when: inventory_hostname == groups['influxdb'][0]
 
 - name: Copy Ansible backup script
   template:
@@ -72,31 +70,29 @@
     owner: backup
     group: backup
     mode: '0500'
-  when: inventory_hostname == "vm1"
+  when: inventory_hostname == groups['internal'][0]
 
-- name: Copy Grafana and Prometheus backup scripts to VM1
+- name: Copy Grafana, Prometheus and InfluxDB backup scripts to the management VM
   copy:
     src: "{{ item }}"
     dest: /home/backup/scripts/{{ item }}
     owner: backup
     group: backup
     mode: '0500'
-  when: inventory_hostname == "vm1"
+  when: inventory_hostname == groups['grafana'][0]
   loop:
     - grafana.sh
     - prometheus.sh
+    - influxdb.sh
 
-- name: Copy MySQL and InfluxDB backup scripts to VM2
+- name: Copy MySQL backup script to the master MySQL instance
   copy:
-    src: "{{ item }}"
+    src: mysql.sh
     dest: /home/backup/scripts
     owner: backup
     group: backup
     mode: '0500'
-  when: inventory_hostname == "vm2"
-  loop:
-    - influxdb.sh
-    - mysql.sh
+  when: inventory_hostname == groups['db_masters'][0]
 
 # Install Duplicity and copy crontabs
 
@@ -105,22 +101,20 @@
     name: duplicity
     state: latest
 
-- name: Copy crontab to VM1
+- name: Copy crontab to VMs with the application stack
   template:
-    src: crontab.vm1.j2
+    src: crontab.app.j2
     dest: /etc/cron.d/backup
     owner: root
     group: root
     mode: '0644'
-  when: inventory_hostname == "vm1"
+  when: inventory_hostname in groups['app_servers']
 
-- name: Copy crontab to VM2
+- name: Copy crontab to the management VM
   template:
-    src: crontab.vm2.j2
+    src: crontab.management.j2
     dest: /etc/cron.d/backup
     owner: root
     group: root
     mode: '0644'
-  when: inventory_hostname == "vm2"
-
-
+  when: inventory_hostname == groups['internal'][0]

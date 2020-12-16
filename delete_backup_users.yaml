@@ -1,0 +1,11 @@
+---
+  - name: Delete backup users
+    hosts: all
+    become: yes
+    tasks:
+      - name: Delete backup user to ensure its successful creation
+        user:
+          name: backup
+          state: absent
+          force: yes
+          remove: yes

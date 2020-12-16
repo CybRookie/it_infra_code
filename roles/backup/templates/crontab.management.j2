@@ -1,0 +1,16 @@
+# According to backup SLA: backups should be done automatically at 1:00 (1 AM) on Sundays with 1 minute step for each service, according to EET (UTC +2) and EEST (UTC +3) time zones
+
+0 23 * * 6 backup /home/backup/scripts/ansible.sh
+1 23 * * 6 backup /home/backup/scripts/grafana.sh
+
+# According to backup SLA: backups should be done automatically at 1:00 (1 AM) on Sundays every 4 weeks, according to EET (UTC +2) and EEST (UTC +3) time zones
+2 23 * * 6 backup [[ $((($(date +%s) / 604800) % 4)) == 0 ]] && /home/backup/scripts/prometheus.sh
+1 23 * * 6 backup [[ $((($(date +%s) / 604800) % 4)) == 0 ]] && /home/backup/scripts/influxdb.sh
+
+# Upload all the backups every week at 1:00 (1 AM) on Sundays, according to EET (UTC +2) and EEST (UTC +3) time zones
+
+3 23 * * 6  backup  duplicity --no-encryption full /home/backup/backup/ rsync://CybRookie@backup.{{ domain_name }}{{ top_level_domain }}//home/CybRookie/ &> /dev/null
+
+# Delete old backups at 5:00 on Sundays every 2 weeks, store only 2 backups, according to EET (UTC +2) and EEST (UTC +3) time zones
+
+0 3 * * 0  backup  [[ $((($(date +%s) / 604800) % 2)) == 0 ]] && duplicity --no-encryption remove-all-but-n-full 2 --force rsync://CybRookie@backup.{{ domain_name }}{{ top_level_domain }}//home/CybRookie/ &> /dev/null

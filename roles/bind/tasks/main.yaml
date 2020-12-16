@@ -20,13 +20,13 @@
 
 - name: Configure master zone
   template:
-    src: db.dystopia.j2
-    dest: /var/lib/bind/db.{{ domain_name }}
+    src: db.main.j2
+    dest: /var/lib/bind/{{ domain_database }}
     force: no
   notify: Reload rndc
   when: inventory_hostname in groups['dns_masters']
 
-# Before mdoification of the domain database - run handlers
+# Before modification of the domain database - run handlers
 
 - name: Execute handlers preemptively
   meta: flush_handlers
@@ -58,3 +58,18 @@
     type: "CNAME"
   loop: "{{ dns_cnames }}"
   when: inventory_hostname == groups['dns_masters'][0]
+
+# Before starting the service - run handlers
+
+- name: Execute handlers preemptively
+  meta: flush_handlers
+
+- name: Sleep for 10 seconds and continue with play
+  wait_for:
+    timeout: 10
+
+- name: Check if the service is started and if it is not, start it
+  service:
+    name: bind9
+    state: started
+    enabled: yes

@@ -4,3 +4,38 @@
     name: mysql
     state: restarted
     enabled: yes
+
+# Automation of replication on the replica host since the Final lab; not a part of the course
+
+- name: Stop MySQL slave thread
+  mysql_replication:
+    mode: stopslave
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname == groups['db_replicas'][0]
+
+- name: Change MySQL master thread to use replication
+  mysql_replication:
+    mode: changemaster
+    master_host: "{{ groups['db_masters'][0] }}"
+    master_user: "{{ mysql_replication_user }}"
+    master_password: "{{ mysql_replication_pass }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname == groups['db_replicas'][0]
+
+- name: Reset MySQL slave thread
+  mysql_replication:
+    mode: resetslave
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname == groups['db_replicas'][0]
+
+- name: Reset MySQL slave thread
+  mysql_replication:
+    mode: resetslave
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname == groups['db_replicas'][0]
+
+- name: Start MySQL slave thread
+  mysql_replication:
+    mode: resetslave
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname == groups['db_replicas'][0]

@@ -20,3 +20,24 @@
     src: telegraf.conf.j2
     dest: /etc/telegraf/telegraf.conf
   notify: Restart Telegraf
+
+# Before starting the service - run handlers
+
+- name: Execute handlers preemptively
+  meta: flush_handlers
+
+- name: Sleep for 10 seconds and continue with play
+  wait_for:
+    timeout: 10
+
+- name: Check if the InfluxDB service is started and if it is not, start it
+  service:
+    name: influxdb
+    state: started
+    enabled: yes
+
+- name: Check if the Telegraf service is started and if it is not, start it
+  service:
+    name: telegraf
+    state: started
+    enabled: yes

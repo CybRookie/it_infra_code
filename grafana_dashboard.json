@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1606944086353,
+  "id": 1,
+  "iteration": 1607776258341,
   "links": [],
   "panels": [
     {
@@ -73,7 +73,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 12,
         "x": 0,
         "y": 1
@@ -93,7 +93,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "nginx_up",
@@ -106,6 +106,107 @@
       "timeShift": null,
       "title": "Nginx Status",
       "type": "stat"
+    },
+    {
+      "aliasColors": {
+        "vm1.dystopia.net.:9113": "dark-green",
+        "vm2.dystopia.net.:9113": "light-purple",
+        "vm2:9113": "light-purple",
+        "vm3:9113": "semi-dark-yellow"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "Nginx requests per minute",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 16,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(nginx_http_requests_total[1m])",
+          "interval": "",
+          "legendFormat": "{{ instance }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Nginx req/min",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {
@@ -140,8 +241,8 @@
       "gridPos": {
         "h": 9,
         "w": 6,
-        "x": 12,
-        "y": 1
+        "x": 0,
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 2,
@@ -166,7 +267,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "pointradius": 1,
       "points": false,
       "renderer": "flot",
@@ -242,8 +343,8 @@
       "gridPos": {
         "h": 9,
         "w": 6,
-        "x": 18,
-        "y": 1
+        "x": 6,
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 18,
@@ -263,7 +364,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -322,15 +423,13 @@
     },
     {
       "aliasColors": {
-        "vm1.dystopia.net.:9113": "dark-green",
-        "vm2.dystopia.net.:9113": "light-purple",
-        "vm2:9113": "light-purple"
+        "Value": "semi-dark-yellow"
       },
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "description": "Nginx requests per minute",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -341,12 +440,12 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 10
+        "w": 6,
+        "x": 12,
+        "y": 8
       },
       "hiddenSeries": false,
-      "id": 16,
+      "id": 38,
       "legend": {
         "avg": false,
         "current": false,
@@ -356,14 +455,14 @@
         "total": false,
         "values": false
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -373,9 +472,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(nginx_http_requests_total[1m])",
+          "expr": "(((count(count(node_cpu{instance=\"vm3:9100\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu{mode='idle',instance=\"vm3:9100\"}[1m])))) * 100) / count(count(node_cpu{instance=\"vm3:9100\"}) by (cpu))",
           "interval": "",
-          "legendFormat": "{{ instance }}",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -383,7 +482,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Nginx req/min",
+      "title": "VM3's CPU (%)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -400,9 +499,9 @@
       "yaxes": [
         {
           "format": "short",
-          "label": null,
+          "label": "%",
           "logBase": 1,
-          "max": null,
+          "max": "100",
           "min": "0",
           "show": true
         },
@@ -423,8 +522,10 @@
     {
       "aliasColors": {
         "vm1.dystopia.net.:9100": "dark-green",
+        "vm1:9100": "green",
         "vm2.dystopia.net.:9100": "light-purple",
-        "vm2:9100": "light-purple"
+        "vm2:9100": "light-purple",
+        "vm3:9100": "#e0b400"
       },
       "bars": false,
       "dashLength": 10,
@@ -454,12 +555,12 @@
         "overrides": []
       },
       "fill": 1,
-      "fillGradient": 2,
+      "fillGradient": 1,
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 10
+        "w": 6,
+        "x": 18,
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 4,
@@ -479,7 +580,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "pointradius": 0.5,
       "points": false,
       "renderer": "flot",
@@ -581,7 +682,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 19
+        "y": 17
       },
       "id": 6,
       "options": {
@@ -598,7 +699,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "bind_up",
@@ -636,9 +737,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
-        "w": 6,
+        "w": 4,
         "x": 12,
-        "y": 19
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 8,
@@ -658,7 +759,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "pointradius": 1,
       "points": true,
       "renderer": "flot",
@@ -717,6 +818,10 @@
     },
     {
       "aliasColors": {
+        "A": "blue",
+        "AAAA": "purple",
+        "NS": "semi-dark-yellow",
+        "SRV": "red",
         "vm2:9119 - A": "blue",
         "vm2:9119 - AAAA": "purple",
         "vm2:9119 - NS": "semi-dark-yellow",
@@ -737,9 +842,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 19
+        "w": 4,
+        "x": 16,
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 37,
@@ -759,7 +864,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "pointradius": 1,
       "points": true,
       "renderer": "flot",
@@ -780,6 +885,111 @@
       "timeRegions": [],
       "timeShift": null,
       "title": "VM2's DNS q/min",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "A": "blue",
+        "AAAA": "purple",
+        "NS": "semi-dark-yellow",
+        "SRV": "red",
+        "vm2:9119 - A": "blue",
+        "vm2:9119 - AAAA": "purple",
+        "vm2:9119 - NS": "semi-dark-yellow",
+        "vm2:9119 - SRV": "red"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "DNS queries per minute for VM2",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 17
+      },
+      "hiddenSeries": false,
+      "id": 39,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.5",
+      "pointradius": 1,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(bind_resolver_queries_total{instance=\"vm3:9119\"}[1m])",
+          "interval": "",
+          "legendFormat": "{{ type }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "VM3's master DNS q/min",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -859,7 +1069,7 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 25
+        "y": 23
       },
       "id": 31,
       "options": {
@@ -876,7 +1086,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "mysql_up",
@@ -913,7 +1123,7 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 25
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 12,
@@ -933,7 +1143,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1033,7 +1243,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 25
+        "y": 23
       },
       "id": 10,
       "options": {
@@ -1050,7 +1260,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "mysql_global_variables_read_only",
@@ -1090,7 +1300,7 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 25
+        "y": 23
       },
       "id": 32,
       "options": {
@@ -1107,7 +1317,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "mysql_global_variables_server_id",
@@ -1164,7 +1374,7 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 31
+        "y": 29
       },
       "id": 33,
       "options": {
@@ -1181,7 +1391,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "haproxy_up",
@@ -1239,7 +1449,7 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 31
+        "y": 29
       },
       "id": 34,
       "options": {
@@ -1256,7 +1466,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "haproxy_server_up{instance=\"vm1:9101\"}",
@@ -1313,7 +1523,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 31
+        "y": 29
       },
       "id": 36,
       "options": {
@@ -1330,7 +1540,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "keepalived_up",
@@ -1399,7 +1609,7 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 31
+        "y": 29
       },
       "id": 35,
       "options": {
@@ -1416,7 +1626,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "expr": "keepalived_vrrp_state",
@@ -1431,997 +1641,986 @@
       "type": "stat"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 35
       },
       "id": 24,
-      "panels": [
-        {
-          "aliasColors": {
-            "Target: cloudflare.com": "light-orange",
-            "Target: google.com": "green",
-            "latency.mean {dst: cloudflare.com}": "light-orange",
-            "latency.mean {dst: google.com}": "light-green",
-            "latency.mean {dst: twitter.com}": "super-light-blue"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "InfluxDB/latency",
-          "description": "Report of the connection latency from the 2nd VM to google.com, twitter.com and cloudflare.com",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 16,
-            "w": 24,
-            "x": 0,
-            "y": 32
-          },
-          "hiddenSeries": false,
-          "id": 22,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": null,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 3,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.4",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Target: [[tag_dst]]",
-              "groupBy": [
-                {
-                  "params": [
-                    "10s"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "dst"
-                  ],
-                  "type": "tag"
-                },
-                {
-                  "params": [
-                    "linear"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "latency",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "rtt"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Connection latency (ms)",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "milliseconds",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
+      "panels": [],
       "title": "Connection latency",
       "type": "row"
     },
     {
-      "collapsed": true,
+      "aliasColors": {
+        "Target: cloudflare.com": "light-orange",
+        "Target: google.com": "green",
+        "latency.mean {dst: cloudflare.com}": "light-orange",
+        "latency.mean {dst: google.com}": "light-green",
+        "latency.mean {dst: twitter.com}": "super-light-blue"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB/latency",
+      "description": "Report of the connection latency from the 2nd VM to google.com, twitter.com and cloudflare.com",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 16,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": null,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Target: [[tag_dst]]",
+          "groupBy": [
+            {
+              "params": [
+                "10s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "dst"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "linear"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "latency",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rtt"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Connection latency (ms)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "milliseconds",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 52
       },
       "id": 30,
-      "panels": [
+      "panels": [],
+      "title": "Syslog messages",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB/syslog",
+      "decimals": 0,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 53
+      },
+      "hiddenSeries": false,
+      "id": 26,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
         {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "InfluxDB/telegraf",
-          "decimals": 0,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 33
-          },
-          "hiddenSeries": false,
-          "id": 26,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": true,
-            "values": true
-          },
-          "lines": false,
-          "linewidth": 1,
-          "nullPointMode": "connected",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.4",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "Info",
-              "color": "rgb(164, 164, 206)",
-              "stack": "A"
-            },
-            {
-              "alias": "Notice",
-              "color": "rgb(107, 173, 222)",
-              "stack": "A"
-            },
-            {
-              "alias": "Warning",
-              "color": "#E0B400",
-              "stack": "A"
-            },
-            {
-              "alias": "Error",
-              "color": "#FF780A",
-              "stack": "A"
-            },
-            {
-              "alias": "Critical",
-              "color": "#E02F44",
-              "stack": "A"
-            },
-            {
-              "alias": "Alert",
-              "color": "#A352CC",
-              "stack": "A"
-            },
-            {
-              "alias": "Emergancy",
-              "color": "#7C2EA3",
-              "stack": "A"
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "Info",
-              "groupBy": [
-                {
-                  "params": [
-                    "1m"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "severity",
-                  "operator": "=",
-                  "value": "info"
-                },
-                {
-                  "condition": "AND",
-                  "key": "hostname",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                }
-              ]
-            },
-            {
-              "alias": "Notice",
-              "groupBy": [
-                {
-                  "params": [
-                    "1m"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "severity",
-                  "operator": "=",
-                  "value": "notice"
-                },
-                {
-                  "condition": "AND",
-                  "key": "hostname",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                }
-              ]
-            },
-            {
-              "alias": "Warning",
-              "groupBy": [
-                {
-                  "params": [
-                    "1m"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT count(\"severity_code\") FROM \"syslog\" WHERE (\"severity\" = 'info' AND \"hostname\" =~ /^$hostname$/ AND \"severity\" =~ /^$severity$/ AND \"appname\" =~ /^$appname$/) AND $timeFilter GROUP BY time(1m) fill(null)",
-              "rawQuery": false,
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "severity",
-                  "operator": "=",
-                  "value": "warning"
-                },
-                {
-                  "condition": "AND",
-                  "key": "hostname",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                }
-              ]
-            },
-            {
-              "alias": "Error",
-              "groupBy": [
-                {
-                  "params": [
-                    "1m"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "severity",
-                  "operator": "=",
-                  "value": "err"
-                },
-                {
-                  "condition": "AND",
-                  "key": "hostname",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                }
-              ]
-            },
-            {
-              "alias": "Critical",
-              "groupBy": [
-                {
-                  "params": [
-                    "1m"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "E",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "severity",
-                  "operator": "=",
-                  "value": "crit"
-                },
-                {
-                  "condition": "AND",
-                  "key": "hostname",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                }
-              ]
-            },
-            {
-              "alias": "Alert",
-              "groupBy": [
-                {
-                  "params": [
-                    "1m"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "F",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "severity",
-                  "operator": "=",
-                  "value": "alert"
-                },
-                {
-                  "condition": "AND",
-                  "key": "hostname",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                }
-              ]
-            },
-            {
-              "alias": "Emergancy",
-              "groupBy": [
-                {
-                  "params": [
-                    "1m"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "G",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "severity",
-                  "operator": "=",
-                  "value": "emerg"
-                },
-                {
-                  "condition": "AND",
-                  "key": "hostname",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                }
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Syslog messages count",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
+          "alias": "Info",
+          "color": "rgb(164, 164, 206)",
+          "stack": "A"
         },
         {
-          "datasource": "InfluxDB/telegraf",
-          "description": "Report of syslog messages",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": "left",
-                "filterable": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "dark-purple",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 2
-                  },
-                  {
-                    "color": "orange",
-                    "value": 3
-                  },
-                  {
-                    "color": "semi-dark-yellow",
-                    "value": 4
-                  },
-                  {
-                    "color": "rgb(107, 173, 222)",
-                    "value": 5
-                  },
-                  {
-                    "color": "rgb(164, 164, 206)",
-                    "value": 6
-                  },
-                  {
-                    "color": "rgb(74, 74, 107)",
-                    "value": 7
-                  }
-                ]
-              }
+          "alias": "Notice",
+          "color": "rgb(107, 173, 222)",
+          "stack": "A"
+        },
+        {
+          "alias": "Warning",
+          "color": "#E0B400",
+          "stack": "A"
+        },
+        {
+          "alias": "Error",
+          "color": "#FF780A",
+          "stack": "A"
+        },
+        {
+          "alias": "Critical",
+          "color": "#E02F44",
+          "stack": "A"
+        },
+        {
+          "alias": "Alert",
+          "color": "#A352CC",
+          "stack": "A"
+        },
+        {
+          "alias": "Emergancy",
+          "color": "#7C2EA3",
+          "stack": "A"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Info",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
             },
-            "overrides": [
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "severity_code"
-                },
-                "properties": [
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "info"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            }
+          ]
+        },
+        {
+          "alias": "Notice",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "notice"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            }
+          ]
+        },
+        {
+          "alias": "Warning",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "warning"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            }
+          ]
+        },
+        {
+          "alias": "Error",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "err"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            }
+          ]
+        },
+        {
+          "alias": "Critical",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "crit"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            }
+          ]
+        },
+        {
+          "alias": "Alert",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "alert"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            }
+          ]
+        },
+        {
+          "alias": "Emergancy",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "emerg"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Syslog messages count",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "InfluxDB/syslog",
+      "description": "Report of syslog messages",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-purple",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 2
+              },
+              {
+                "color": "orange",
+                "value": 3
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 4
+              },
+              {
+                "color": "rgb(107, 173, 222)",
+                "value": 5
+              },
+              {
+                "color": "rgb(164, 164, 206)",
+                "value": 6
+              },
+              {
+                "color": "rgb(74, 74, 107)",
+                "value": 7
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "severity_code"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
                   {
-                    "id": "mappings",
-                    "value": [
-                      {
-                        "from": "",
-                        "id": 1,
-                        "text": "Debug",
-                        "to": "",
-                        "type": 1,
-                        "value": "7"
-                      },
-                      {
-                        "from": "",
-                        "id": 2,
-                        "text": "Info",
-                        "to": "",
-                        "type": 1,
-                        "value": "6"
-                      },
-                      {
-                        "from": "",
-                        "id": 3,
-                        "text": "Notice",
-                        "to": "",
-                        "type": 1,
-                        "value": "5"
-                      },
-                      {
-                        "from": "",
-                        "id": 4,
-                        "text": "Warning",
-                        "to": "",
-                        "type": 1,
-                        "value": "4"
-                      },
-                      {
-                        "from": "",
-                        "id": 5,
-                        "text": "Error",
-                        "to": "",
-                        "type": 1,
-                        "value": "3"
-                      },
-                      {
-                        "from": "",
-                        "id": 6,
-                        "text": "Critical",
-                        "to": "",
-                        "type": 1,
-                        "value": "2"
-                      },
-                      {
-                        "from": "",
-                        "id": 7,
-                        "text": "Alert",
-                        "to": "",
-                        "type": 1,
-                        "value": "1"
-                      },
-                      {
-                        "from": "",
-                        "id": 8,
-                        "text": "Emergancy",
-                        "to": "",
-                        "type": 1,
-                        "value": "0"
-                      }
-                    ]
+                    "from": "",
+                    "id": 1,
+                    "text": "Debug",
+                    "to": "",
+                    "type": 1,
+                    "value": "7"
                   },
                   {
-                    "id": "custom.displayMode",
-                    "value": "color-background"
+                    "from": "",
+                    "id": 2,
+                    "text": "Info",
+                    "to": "",
+                    "type": 1,
+                    "value": "6"
                   },
                   {
-                    "id": "custom.width",
-                    "value": 119
+                    "from": "",
+                    "id": 3,
+                    "text": "Notice",
+                    "to": "",
+                    "type": 1,
+                    "value": "5"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Warning",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Error",
+                    "to": "",
+                    "type": 1,
+                    "value": "3"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Critical",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Alert",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 8,
+                    "text": "Emergancy",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
                   }
                 ]
               },
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Time"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 163
-                  }
-                ]
+                "id": "custom.displayMode",
+                "value": "color-background"
               },
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "hostname"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 193
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "appname"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 264
-                  }
-                ]
+                "id": "custom.width",
+                "value": 119
               }
             ]
           },
-          "gridPos": {
-            "h": 11,
-            "w": 24,
-            "x": 0,
-            "y": 39
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 163
+              }
+            ]
           },
-          "id": 28,
-          "options": {
-            "showHeader": true
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hostname"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 193
+              }
+            ]
           },
-          "pluginVersion": "7.3.4",
-          "targets": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "appname"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 264
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 28,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "groupBy": [
             {
-              "groupBy": [
-                {
-                  "params": [
-                    "hostname"
-                  ],
-                  "type": "tag"
-                },
-                {
-                  "params": [
-                    "appname"
-                  ],
-                  "type": "tag"
-                }
+              "params": [
+                "hostname"
               ],
-              "measurement": "syslog",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "table",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "severity_code"
-                    ],
-                    "type": "field"
-                  }
-                ],
-                [
-                  {
-                    "params": [
-                      "message"
-                    ],
-                    "type": "field"
-                  }
-                ]
+              "type": "tag"
+            },
+            {
+              "params": [
+                "appname"
               ],
-              "tags": [
-                {
-                  "key": "host",
-                  "operator": "=~",
-                  "value": "/^$hostname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "appname",
-                  "operator": "=~",
-                  "value": "/^$appname$/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "severity",
-                  "operator": "=~",
-                  "value": "/^$severity$/"
-                }
-              ]
+              "type": "tag"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Syslog messages",
-          "type": "table"
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "message"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=~",
+              "value": "/^$hostname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            }
+          ]
         }
       ],
+      "timeFrom": null,
+      "timeShift": null,
       "title": "Syslog messages",
-      "type": "row"
+      "type": "table"
     }
   ],
   "refresh": "5s",
@@ -2441,7 +2640,7 @@
             "$__all"
           ]
         },
-        "datasource": "InfluxDB/telegraf",
+        "datasource": "InfluxDB/syslog",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -2472,7 +2671,7 @@
             "$__all"
           ]
         },
-        "datasource": "InfluxDB/telegraf",
+        "datasource": "InfluxDB/syslog",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -2485,7 +2684,7 @@
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -2503,7 +2702,7 @@
             "$__all"
           ]
         },
-        "datasource": "InfluxDB/telegraf",
+        "datasource": "InfluxDB/syslog",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -2543,5 +2742,5 @@
   "timezone": "",
   "title": "Dashboard",
   "uid": "1br29l5Gz",
-  "version": 58
+  "version": 6
 }

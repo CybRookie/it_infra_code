@@ -3,9 +3,10 @@
   hosts: all
   become: yes
   tasks:
-  - name: Update cache
+  - name: Update cache once in 24h
     apt:
       update_cache: yes
+      cache_valid_time: 86400
   - name: Remove unnecessary packages
     apt:
       autoremove: yes
