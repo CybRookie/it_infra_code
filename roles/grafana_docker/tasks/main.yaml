@@ -1,14 +1,11 @@
 ---
-- name: Create Grafana directories
+- name: Create Grafana directory
   file:
-    name: "{{ item }}"
+    name: /opt/docker/grafana
     state: directory
     owner: "472"
     group: "472"
     recurse: true
-  loop:
-    - /opt/docker/grafana
-    - /opt/docker/grafana-etc
 
 - name: Setup Grafana container
   docker_container:
@@ -21,5 +18,4 @@
       - "{{ docker_grafana_port }}:3000"
     volumes:
       - /opt/docker/grafana:/var/lib/grafana/
-      - /opt/docker/grafana-etc:/etc/grafana/
     restart_policy: always

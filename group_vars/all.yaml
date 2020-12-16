@@ -1,6 +1,5 @@
 ### MySQL parameters
 
-mysql_host: 192.168.42.46
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -79,10 +78,6 @@ prometheus_exporters:
 
   bind:
     port: 9119
-
-### Backup server IP address
-
-backup_ip: 192.168.42.156
 
 ### Docker parameteres
 

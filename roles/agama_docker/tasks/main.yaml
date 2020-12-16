@@ -36,7 +36,7 @@
     name: agama
     image: agama
     env:
-      AGAMA_DATABASE_URI: mysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
+      AGAMA_DATABASE_URI: "mysql://{{ mysql_user }}:{{ mysql_password }}@{{ hostvars[groups['db_masters'][0]]['ansible_default_ipv4']['address'] }}/{{ mysql_database }}"
     ports:
       - "{{ docker_agama_port }}:8000"
     restart_policy: always

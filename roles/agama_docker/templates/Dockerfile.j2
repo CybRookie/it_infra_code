@@ -6,7 +6,7 @@ RUN apk add python3 && \
     mkdir /agama && \
     wget -O/agama/agama.py https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
 
-ENV AGAMA_DATABASE_URI=mysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
+ENV AGAMA_DATABASE_URI=mysql://{{ mysql_user }}:{{ mysql_password }}@{{ hostvars[groups['db_masters'][0]]['ansible_default_ipv4']['address'] }}/{{ mysql_database }}
 ENV FLASK_APP=agama
 
 EXPOSE 8000/tcp
