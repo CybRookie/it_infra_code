@@ -24,6 +24,8 @@ options {
     };
     dnssec-validation no;
     auth-nxdomain no;    # conform to RFC1053
+    listen-on-v6 { any; };
+    allow-query { allowed_networks; };
 };
 
 #Since Lab 7 - Grafana, for bind exporter

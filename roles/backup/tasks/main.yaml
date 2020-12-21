@@ -12,6 +12,11 @@
     - Add the user to the InfluxDB group on the management VM
     - Add the user to the MySQL group on the master MySQL instance
 
+- name: Add the group "backup"
+  group:
+    name: backup
+    state: present
+
 - name: Create a group "472" for Grafana backups
   group: 
     name: "472"

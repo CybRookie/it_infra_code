@@ -6,7 +6,7 @@
       - python3-dnspython
     state: latest
 
-- name: Override master Bind9 configuration
+- name: Override Bind9 configuration
   template:
     src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
@@ -58,20 +58,6 @@
     type: "CNAME"
   loop: "{{ dns_cnames }}"
   when: inventory_hostname == groups['dns_masters'][0]
-
-- name: Add CNAME record for service's subdomains to the primary domain database
-  nsupdate:
-    key_algorithm: "hmac-sha256"
-    key_name: "{{ dns_update_key_name }}"
-    key_secret: "{{ dns_update_key }}"
-    server: "{{ hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address'] }}"
-    zone: "{{ domain_name }}{{ top_level_domain }}."
-    record: "test.{{ domain_name }}{{ top_level_domain }}."
-    value: "vm3.{{ domain_name }}{{ top_level_domain }}."
-    type: "CNAME"
-  loop: "{{ dns_cnames }}"
-  when: inventory_hostname == groups['dns_masters'][0]
-  tags: testCname
 
 # Before starting the service - run handlers
 
