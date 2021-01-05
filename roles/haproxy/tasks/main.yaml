@@ -15,25 +15,14 @@
 #    name: haproxy_exporter
 #    state: latest
 
-- name: Setup HAProxy exporter on VM1
+- name: Setup HAProxy exporter on VMs
   docker_container:
     name: haproxy_exporter
     image: quay.io/prometheus/haproxy-exporter:v0.9.0
     ports:
       - "{{ docker_haproxy_exporter_port }}:9101"
-    command: --haproxy.scrape-uri="http://vm1:{{ haproxy_port }}/haproxy?stats;csv"
+    command: --haproxy.scrape-uri="http://{{inventory_hostname}}:{{ haproxy_port }}/haproxy?stats;csv"
     restart_policy: always
-  when: inventory_hostname == "vm1"
-
-- name: Setup HAProxy exporter on VM2
-  docker_container:
-    name: haproxy_exporter
-    image: quay.io/prometheus/haproxy-exporter:v0.9.0
-    ports:
-      - "{{ docker_haproxy_exporter_port }}:9101"
-    command: --haproxy.scrape-uri="http://vm2:{{ haproxy_port }}/haproxy?stats;csv"
-    restart_policy: always
-  when: inventory_hostname == "vm2"
 
 # Before starting the service - run handlers
 

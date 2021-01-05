@@ -29,7 +29,7 @@
 - name: Configure MySQL exporter
   template:
     src: my.cnf.j2
-    dest: /home/prometheus/.my.cnf
+    dest: /var/lib/prometheus/.my.cnf
     owner: prometheus
     group: prometheus
     mode: '0400'
